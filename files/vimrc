@@ -38,6 +38,9 @@ nnoremap <leader>' mzviw<esc>a'<esc>bi'<esc>g`zl
 vnoremap <leader>" <esc>g`<i"<esc>g`>la"<esc>
 vnoremap <leader>' <esc>g`<i'<esc>g`>la'<esc>
 
+" Make current file executable
+nnoremap <leader>755 :!chmod 755 %<cr>
+
 " Commenting
 if has("autocmd")
   augroup commenting
