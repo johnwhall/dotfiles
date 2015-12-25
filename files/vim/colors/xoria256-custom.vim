@@ -1,4 +1,5 @@
-:source ~/.vim/colors/xoria256.vim
+:let s:local_path=expand('<sfile>:p:h')
+:execute 'source' s:local_path . '/xoria256.vim'
 
 hi Normal     ctermfg=252  guifg=#d0d0d0 ctermbg=none guibg=#1c1c1c cterm=none      gui=none
 hi NonText    ctermfg=247  guifg=#9e9e9e ctermbg=none guibg=#121212 cterm=bold      gui=bold
