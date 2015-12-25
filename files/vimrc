@@ -38,11 +38,14 @@ vnoremap <leader>' <esc>g`<i'<esc>g`>la'<esc>
 augroup commenting
   autocmd!
   autocmd FileType c,cpp,java nnoremap <buffer> <localleader>c mzI//<esc>g`zll
-  autocmd FileType python     nnoremap <buffer> <localleader>c mzI#<esc>g`zl
+  autocmd FileType python,sh  nnoremap <buffer> <localleader>c mzI#<esc>g`zl
+  autocmd FileType vim        nnoremap <buffer> <localleader>c mzI"<esc>g`zl
   autocmd FileType c,cpp,java nnoremap <buffer> <localleader>C mz0i//<esc>g`zll
-  autocmd FileType python     nnoremap <buffer> <localleader>C mz0i#<esc>g`zl
-  autocmd FileType c,cpp,java vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/\/\//<cr>gvll
-  autocmd FileType python     vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/#/<cr>gvll
+  autocmd FileType python,sh  nnoremap <buffer> <localleader>C mz0i#<esc>g`zl
+  autocmd FileType vim        nnoremap <buffer> <localleader>C mz0i"<esc>g`zl
+  autocmd FileType c,cpp,java vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/\/\//<cr>
+  autocmd FileType python,sh  vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/#/<cr>
+  autocmd FileType vim        vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/"/<cr>
 augroup END
 
 " Stuff from Learn Vimscript the Hard Way that I will probably delete
