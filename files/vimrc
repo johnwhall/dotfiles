@@ -16,31 +16,31 @@ cnoremap w!! w !sudo tee %
 inoremap jk <esc>
 
 " Capitalize current word
-inoremap <c-u> <esc>mzviwU`za
+inoremap <c-u> <esc>mzviwUg`za
 
 " Move current line up or down
-nnoremap - mz:m +1<cr>`z
-nnoremap _ mz:m -2<cr>`z
+nnoremap - mz:m +1<cr>g`z
+nnoremap _ mz:m -2<cr>g`z
 
 " Edit/source vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Surround current word with quotes
-nnoremap <leader>" mzviw<esc>a"<esc>bi"<esc>`zl
-nnoremap <leader>' mzviw<esc>a'<esc>bi'<esc>`zl
+nnoremap <leader>" mzviw<esc>a"<esc>bi"<esc>g`zl
+nnoremap <leader>' mzviw<esc>a'<esc>bi'<esc>g`zl
 
 " Surround visual selection with quotes
-vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>gv
-vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>gv
+vnoremap <leader>" <esc>g`<i"<esc>g`>la"<esc>
+vnoremap <leader>' <esc>g`<i'<esc>g`>la'<esc>
 
 " Commenting
 augroup commenting
   autocmd!
-  autocmd FileType c,cpp,java nnoremap <buffer> <localleader>c mzI//<esc>`zll
-  autocmd FileType python     nnoremap <buffer> <localleader>c mzI#<esc>`zl
-  autocmd FileType c,cpp,java nnoremap <buffer> <localleader>C mz0i//<esc>`zll
-  autocmd FileType python     nnoremap <buffer> <localleader>C mz0i#<esc>`zl
+  autocmd FileType c,cpp,java nnoremap <buffer> <localleader>c mzI//<esc>g`zll
+  autocmd FileType python     nnoremap <buffer> <localleader>c mzI#<esc>g`zl
+  autocmd FileType c,cpp,java nnoremap <buffer> <localleader>C mz0i//<esc>g`zll
+  autocmd FileType python     nnoremap <buffer> <localleader>C mz0i#<esc>g`zl
   autocmd FileType c,cpp,java vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/\/\//<cr>gvll
   autocmd FileType python     vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/#/<cr>gvll
 augroup END
