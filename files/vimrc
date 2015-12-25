@@ -4,7 +4,10 @@ filetype on
 syntax on
 
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  augroup lineRestore
+    autocmd!
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  augroup END
 endif
 
 let mapleader = ","
@@ -35,18 +38,20 @@ vnoremap <leader>" <esc>g`<i"<esc>g`>la"<esc>
 vnoremap <leader>' <esc>g`<i'<esc>g`>la'<esc>
 
 " Commenting
-augroup commenting
-  autocmd!
-  autocmd FileType c,cpp,java nnoremap <buffer> <localleader>c mzI//<esc>g`zll
-  autocmd FileType python,sh  nnoremap <buffer> <localleader>c mzI#<esc>g`zl
-  autocmd FileType vim        nnoremap <buffer> <localleader>c mzI"<esc>g`zl
-  autocmd FileType c,cpp,java nnoremap <buffer> <localleader>C mz0i//<esc>g`zll
-  autocmd FileType python,sh  nnoremap <buffer> <localleader>C mz0i#<esc>g`zl
-  autocmd FileType vim        nnoremap <buffer> <localleader>C mz0i"<esc>g`zl
-  autocmd FileType c,cpp,java vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/\/\//<cr>
-  autocmd FileType python,sh  vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/#/<cr>
-  autocmd FileType vim        vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/"/<cr>
-augroup END
+if has("autocmd")
+  augroup commenting
+    autocmd!
+    autocmd FileType c,cpp,java nnoremap <buffer> <localleader>c mzI//<esc>g`zll
+    autocmd FileType python,sh  nnoremap <buffer> <localleader>c mzI#<esc>g`zl
+    autocmd FileType vim        nnoremap <buffer> <localleader>c mzI"<esc>g`zl
+    autocmd FileType c,cpp,java nnoremap <buffer> <localleader>C mz0i//<esc>g`zll
+    autocmd FileType python,sh  nnoremap <buffer> <localleader>C mz0i#<esc>g`zl
+    autocmd FileType vim        nnoremap <buffer> <localleader>C mz0i"<esc>g`zl
+    autocmd FileType c,cpp,java vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/\/\//<cr>
+    autocmd FileType python,sh  vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/#/<cr>
+    autocmd FileType vim        vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/"/<cr>
+  augroup END
+endif
 
 " Stuff from Learn Vimscript the Hard Way that I will probably delete
 "onoremap in( :<c-u>normal! f(vi(<cr>
