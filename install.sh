@@ -1,17 +1,24 @@
-#!/bin/bash
+#!/bin/bash -xe
 
-pushd $(dirname $0) > /dev/null
-here=$(pwd | sed s#^$HOME/##)
-popd > /dev/null
+bkupDir=$HOME/.dotfiles_backup
+rm -rf "$bkupDir"
 
-#here=$(basename $0 | sed s#^$HOME/##)
-dotfiles="vimrc"
+cd "$(dirname $0)/files"
 
-for file in $dotfiles; do
-  if [ -e ~/.$file ]; then
-    mkdir -p ~/.dotfiles_old
-    mv ~/.$file ~/.dotfiles_old/
+shopt -s globstar
+for file in **/*; do
+  tgtFile="$HOME/.$file"
+  bkupFile=$bkupDir/$file
+
+  if [ -d "$file" ]; then
+    mkdir -p "$tgtFile"
+  else
+    if [ -e "$tgtFile" ]; then
+      mkdir -p "$(dirname "$bkupFile")"
+      mv "$tgtFile" "$bkupFile"
+    fi
+
+    rm -f "$tgtFile"
+    ln -s "$PWD/$file" "$tgtFile"
   fi
-
-  ln -s $here/$file ~/.$file
 done

@@ -1,0 +1,38 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+#alias ls='ls --color=auto'
+PS1='[\u@\h \W]\$ '
+
+alias vi=vim
+export EDITOR=vim
+
+export PATH="$HOME/bin:$PATH"
+
+alias mhp=/etc/udev_user/monitor-hotplug
+alias asw='bash /etc/udev_user/audio-switch'
+
+# allow aliases in sudo commands
+alias sudo='sudo '
+
+export WINEARCH=win32
+
+export STEAM_RUNTIME=0
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+alias ff="find -name "
+
+function mkcd() {
+  mkdir "$1" && cd "$1"
+}
+
+function envf() {
+  local envFile=$1
+  shift
+  env -i $(cat $envFile | xargs) "$@"
+}
