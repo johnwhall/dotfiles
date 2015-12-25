@@ -14,6 +14,7 @@ let mapleader = ","
 let maplocalleader = "\\"
 
 set number relativenumber
+set laststatus=2
 
 cnoremap w!! w !sudo tee %
 inoremap jk <esc>
