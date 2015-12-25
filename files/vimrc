@@ -65,3 +65,11 @@ endif
 "onoremap al{ :<c-u>normal! F{va{<cr>
 
 color xoria256-custom
+
+" Remove trailing spaces
+if has("autocmd")
+  augroup removeTrailingWhitespace
+    autocmd!
+    autocmd BufWritePre * :%s/\s\+$//e
+  augroup END
+endif
