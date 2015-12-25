@@ -28,6 +28,11 @@ ssh-add -L | grep -q " $HOME/\.ssh/id_rsa\$" || ssh-add ~/.ssh/id_rsa
 
 alias ff="find -name "
 
+alias gitc="git commit"
+alias gitca="git commit -a"
+alias gitcm="git commit --amend"
+alias gitcam="git commit -a --amend"
+
 function mkcd() {
   mkdir "$1" && cd "$1"
 }
