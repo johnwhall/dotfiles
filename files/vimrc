@@ -19,6 +19,8 @@ set laststatus=2
 cnoremap w!! w !sudo tee %
 inoremap jk <esc>
 
+set splitright splitbelow
+
 " Capitalize current word
 inoremap <c-u> <esc>mzviwUg`za
 
@@ -38,6 +40,14 @@ nnoremap <leader>' mzviw<esc>a'<esc>bi'<esc>g`zl
 vnoremap <leader>" <esc>g`<i"<esc>g`>la"<esc>
 vnoremap <leader>' <esc>g`<i'<esc>g`>la'<esc>
 
+" Surround current word with parentheses
+nnoremap <leader>( mzviw<esc>a(<esc>bi)<esc>g`zl
+nnoremap <leader>) mzviw<esc>a(<esc>bi)<esc>g`zl
+
+" Surround visual selection with quotes
+vnoremap <leader>( <esc>g`>a)<esc>g`<i(<esc>
+vnoremap <leader>) <esc>g`>a)<esc>g`<i(<esc>
+
 " Make current file executable
 nnoremap <leader>755 :!chmod 755 %<cr>
 
@@ -45,15 +55,19 @@ nnoremap <leader>755 :!chmod 755 %<cr>
 if has("autocmd")
   augroup commenting
     autocmd!
-    autocmd FileType c,cpp,java nnoremap <buffer> <localleader>c mzI//<esc>g`zll
-    autocmd FileType python,sh  nnoremap <buffer> <localleader>c mzI#<esc>g`zl
-    autocmd FileType vim        nnoremap <buffer> <localleader>c mzI"<esc>g`zl
-    autocmd FileType c,cpp,java nnoremap <buffer> <localleader>C mz0i//<esc>g`zll
-    autocmd FileType python,sh  nnoremap <buffer> <localleader>C mz0i#<esc>g`zl
-    autocmd FileType vim        nnoremap <buffer> <localleader>C mz0i"<esc>g`zl
-    autocmd FileType c,cpp,java vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/\/\//<cr>
-    autocmd FileType python,sh  vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/#/<cr>
-    autocmd FileType vim        vnoremap <buffer> <localleader>C <esc>:'<,'>s/^/"/<cr>
+"    autocmd FileType c,cpp,java,kerboscript nnoremap <buffer> <localleader>c mzI//<esc>g`zll
+"    autocmd FileType python,sh  nnoremap <buffer> <localleader>c mzI#<esc>g`zl
+"    autocmd FileType vim        nnoremap <buffer> <localleader>c mzI"<esc>g`zl
+    autocmd FileType c,cpp,java,kerboscript nnoremap <buffer> <localleader>c mz0i//<esc>g`zll
+    autocmd FileType python,sh  nnoremap <buffer> <localleader>c mz0i#<esc>g`zl
+    autocmd FileType vim        nnoremap <buffer> <localleader>c mz0i"<esc>g`zl
+    autocmd FileType c,cpp,java,kerboscript vnoremap <buffer> <localleader>c <esc>:'<,'>s/^/\/\//<cr>
+    autocmd FileType python,sh  vnoremap <buffer> <localleader>c <esc>:'<,'>s/^/#/<cr>
+    autocmd FileType vim        vnoremap <buffer> <localleader>c <esc>:'<,'>s/^/"/<cr>
+    autocmd FileType vim nnoremap <buffer> <localleader>C mz:s/^\(\s*\)"/\1/<cr>g`zh
+    autocmd FileType vim vnoremap <buffer> <localleader>C <esc>:'<,'>s/^\(\s*\)"/\1/<cr>
+    autocmd FileType kerboscript nnoremap <buffer> <localleader>C mz:s#^\(\s*\)//#\1#<cr>g`zhh
+    autocmd FileType kerboscript vnoremap <buffer> <localleader>C <esc>:'<,'>s#^\(\s*\)//#\1#<cr>
   augroup END
 endif
 
@@ -70,9 +84,15 @@ endif
 color xoria256-custom
 
 " Remove trailing spaces
+function! StripTrailingWhitespace()
+  normal mz
+  %s/\s\+$//e
+  normal g`z
+endfunction
+
 if has("autocmd")
   augroup removeTrailingWhitespace
     autocmd!
-    autocmd BufWritePre * :%s/\s\+$//e
+    autocmd BufWritePre * :call StripTrailingWhitespace()
   augroup END
 endif
