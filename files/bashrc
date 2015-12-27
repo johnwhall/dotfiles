@@ -33,6 +33,8 @@ alias gitca="git commit -a"
 alias gitcm="git commit --amend"
 alias gitcam="git commit -a --amend"
 
+alias gtksp="cd ~/.steam/steam/SteamApps/common/Kerbal\ Space\ Program\ 1.0.5"
+
 function mkcd() {
   mkdir "$1" && cd "$1"
 }
