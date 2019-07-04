@@ -23,17 +23,18 @@ export WINEARCH=win32
 
 export STEAM_RUNTIME=0
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-ssh-add -L | grep -q " $HOME/\.ssh/id_rsa\$" || ssh-add ~/.ssh/id_rsa
+if [ -f ~/.ssh/id_rsa ]; then
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  ssh-add -L | grep -q " $HOME/\.ssh/id_rsa\$" || ssh-add ~/.ssh/id_rsa
+fi
 
 alias ff="find -name "
 
+alias gits="git status"
 alias gitc="git commit"
 alias gitca="git commit -a"
 alias gitcm="git commit --amend"
 alias gitcam="git commit -a --amend"
-
-alias gtksp="cd ~/.steam/steam/SteamApps/common/Kerbal\ Space\ Program\ 1.0.5"
 
 function mkcd() {
   mkdir "$1" && cd "$1"

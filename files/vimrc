@@ -13,7 +13,7 @@ endif
 let mapleader = ","
 let maplocalleader = "\\"
 
-set number relativenumber
+set number norelativenumber
 set laststatus=2
 
 cnoremap w!! w !sudo tee %
